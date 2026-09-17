@@ -1,0 +1,71 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+
+# =========================
+# Visual Studio
+# =========================
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# =========================
+# SQL Server / SSAS / SSIS
+# =========================
+*.bak
+*.trn
+*.log
+*.mdf
+*.ldf
+
+# Generated deployment files
+*.asdatabase
+*.deploymentoptions
+*.deploymenttargets
+
+# =========================
+# VS Code
+# =========================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.example.json
+
+# =========================
+# OS files
+# =========================
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.temp
+*.swp
+~$*
