@@ -102,7 +102,7 @@ ORDER BY
 
 
 
-    -- ============================================================
+-- ============================================================
 -- Product hierarchy
 -- ============================================================
 
@@ -162,3 +162,43 @@ FROM dbo.DimProduct
 WHERE ProductAlternateKey = 'CA-1098'
 ORDER BY
     StartDate;
+
+
+-- Check business keys with multiple dimension versions
+SELECT
+    ProductAlternateKey,
+    COUNT(*) AS NumberOfVersions
+FROM dbo.DimProduct
+WHERE ProductAlternateKey IS NOT NULL
+GROUP BY
+    ProductAlternateKey
+HAVING COUNT(*) > 1
+ORDER BY
+    NumberOfVersions DESC;
+
+
+-- Validate date ranges for a historical product
+SELECT
+    ProductKey,
+    ProductAlternateKey,
+    StartDate,
+    EndDate,
+    DATEDIFF(DAY, StartDate, EndDate) AS DaysBetween,
+    Status
+FROM dbo.DimProduct
+WHERE ProductAlternateKey = 'CA-1098'
+ORDER BY
+    ProductKey;
+
+
+-- Findings:
+-- ProductAlternateKey is the business/natural key.
+-- ProductKey is the surrogate key used by the Data Warehouse.
+--
+-- The same business key can have multiple ProductKey values,
+-- allowing multiple versions of the same business entity.
+--
+-- CA-1098 has three versions with different attribute values.
+-- The sample data contains inconsistent StartDate/EndDate ranges
+-- for some historical versions, so those dates should not be
+-- assumed to represent valid history without validation.
